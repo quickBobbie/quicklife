@@ -1,0 +1,44 @@
+extends user
+
+block user_content
+	#user_info
+		.form_title
+			h2 Информация
+		.ui_block
+			ul
+				if (birthday)
+					li
+						span День рождения
+						span= birthday.day + '.' + birthday.month + '.' + birthday.year + 'г. (' + birthday.old + 'лет)'
+				if (user.gender)
+					li
+						span Пол
+						span= user.gender
+				if (user.mar_status)
+					li
+						span Семейное положение
+						span= user.mar_status
+				if (user.quote)
+					li
+						span Цитата
+						p= user.quote
+				if (user.city)
+					li
+						span Город
+						span= user.city
+				if (user.telephone_num)
+					li
+						span Номер телефона
+						span= user.telephone_num
+				if (user.fb_link)
+					li
+						span Facebook
+						a(href='https://facebook.com/#{user.fb_link}' target='_blank')= user.fb_link
+				if (user.vk_link)
+					li
+						span Vkontakte
+						a(href='https://vk.com/#{user.vk_link}' target='_blank')= user.vk_link
+				if (user.web_site)
+					li
+						span Web сайт
+						a(href='#{user.web_site}' target='_blank')= user.web_site

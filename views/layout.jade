@@ -1,0 +1,34 @@
+doctype
+html
+	head
+		title quicklife | welcome
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet' href='../styles/welcome.css')
+		script(src='../js/lib/jquery-3.1.0.js')
+		script(src='../js/al/action.js')
+		script(src='../js/al/postController.js')
+		script(src='../js/al/domController.js')
+	body
+		#container
+			#welcome_cont
+				.wlc_bg
+				.wlc_op
+			#user_container
+				header
+					h1 Добро пожаловать в quicklife
+					nav
+						ul
+							li
+								a(href='/') Главная
+							li
+								a(href='/register') Регистрация
+							//- li
+							//- 	a(href='') Правила
+							//- li
+							//- 	a(href='') О проекте
+				block content
+			footer
+				span Собственность Сергея Ущанского
+				span quicklife.net &copy 2017
+		script(src='../js/al/main.js')

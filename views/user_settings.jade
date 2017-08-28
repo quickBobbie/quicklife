@@ -1,0 +1,63 @@
+extends user
+
+block user_content
+	#settings
+		.form_title
+			h2 Настройки профиля
+		form(method='post', action='/id:id')
+			.settings_form
+				ul
+					li
+						span Имя
+						input(type='text' name='first_name' value='#{user.first_name}')
+					li
+						span Фамилия
+						input(type='text' name='last_name' value='#{user.last_name}')
+					li
+						span День рождения
+						input(type='date' name='birthday' value='#{birthday.year}-#{birthday.month}-#{birthday.day}')
+					li
+						span Город
+						input(type='text' name='city' value='#{user.city}')
+					li
+						span Семейное положение
+						select(name='mar_status')
+							option Все сложно
+							option В активном поиске
+							option Встречаюсь
+							option Женат
+							option Замужем
+							option Не женат
+							option Не замужем
+					li
+						span Пол
+						select(name='gender')
+							option Мужской
+							option Женский
+					li
+						span Номер телефона
+						input(type='text' name='phone' value='#{user.telephone_num}')
+					li
+						span Facebook
+						input(type='text' name='facebook' value='#{user.fb_link}')
+					li
+						span Vkontakte
+						input(type='text' name='vk' value='#{user.vk_link}')
+					li
+						span Web сайт
+						input(type='text' name='site' value='#{user.web_site}')
+					li
+						span Цитата
+						textarea(name='quote' value='#{user.quote}')
+					li
+						span Старый пароль
+						input(type='text' name='password_old')
+					li
+						span Новый пароль
+						input(type='password' name='password_1')
+					li
+						span Повторите пароль
+						input(type='password' name='password_2')
+					li
+						//- #delete_page Удалить страницу
+						button#sf_sub(type='submit') Сохранить

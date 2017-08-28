@@ -1,0 +1,62 @@
+extends user_layout
+
+block content
+	#content.content
+		each post in posts
+			section
+				.post
+					a.post_title(href='/id#{post.author_id}')
+						.title_img
+							if (post.author_avatar)
+								img.user_avatar(src='../users/#{post.author_id}/images/#{post.author_avatar}')
+							else
+								img.user_avatar(src='../images/avatar.png')
+						.title_text
+							h2= post.author_name + ' ' + post.author_action
+							-var day = post.date.getDate();
+							-var month = (post.date.getMonth()+1);
+							-var year = post.date.getFullYear();
+							-var hours = post.date.getHours();
+							-var minutes = post.date.getMinutes();
+							-if(day < 10) day = '0' + day;
+							-if(month < 10) month = '0' + month;
+							-if(hours < 10) hours = '0' + hours;
+							-if(minutes < 10) minutes = '0' + minutes;
+							span #{day}.#{month}.#{year} в #{hours}:#{minutes}
+					.post_content
+						if (post.image_name)
+							img(src="../users/#{post.author_id}/images/#{post.image_name}")
+						if (post.text)
+							.post_text
+								p= post.text
+					.post_actions
+							#like_post(post='#{post.post_id}')
+								a.action_but.togglePostLike(href='' onclick='togglePostLike(event, #{post.post_id});')
+									i(style='background-position: -30px 0;')
+									span= post.likes.length
+							#comment_count
+								.action_but
+									i(style='background-position: -61px 0;')
+									span= post.comments.length
+	aside
+		#side_block
+			.side_title
+				h2 Новости
+			.side_menu
+				nav
+					ul
+						li
+							a(href='?section=all') Все
+						li
+							a(href='?section=interesting') Интересные
+						li
+							a(href='?section=photo') Фотографии
+	script.
+		$(window).on('scroll', function () {
+			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+				skipNews(event, '/news', {
+					action : 'find_news',
+					skip : $('section').length
+				});
+			};
+		});

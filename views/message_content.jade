@@ -1,0 +1,32 @@
+extends message_list
+
+block user_content
+	.messenger
+		.side_title
+			h2=user_name
+		.message_block
+			if (messages)
+				each message in messages.messages
+					if (message.user_1 == isUserID)
+						.message_item
+							.message(style="float:right;")
+								.mess_date
+									span=message.date
+								.mess_text(style="background: #b2ccb9;")
+									p=message.text
+					else
+						.message_item
+							.message(style="float:left;")
+								.mess_text(style="background: #fff;")
+									p=message.text
+								.mess_date
+									span=message.date
+		.message_form
+			if (socket_id)
+				form.sendSocketMessage(onsubmit="sendMessage(#{socket_id}, #{message_id}, #{user_name}, event)")
+					textarea(name="message")
+					button(type="submit") Отправить
+			else
+				form.sendMessage
+					textarea(name="message")
+					button(type="submit") Отправить

@@ -1,0 +1,26 @@
+extends user
+
+block user_content
+	#content_form
+		.form_title
+			h2= 'Найдено ' + users.length + ' человек'
+	#peoples_tape
+		each user, i in users
+			section
+				.people
+					if (user.avatar)
+						img.user_avatar(src='../users/#{user.user_id}/images/#{user.avatar}')
+					else
+						img.user_avatar(src='../images/avatar.png')
+					a(href='/id#{user.user_id}').people_info
+						h3= user.first_name + ' ' + user.last_name
+						span='Лайков:' + user.likes.length
+					.people_action
+						#people_add.toggleSubscribe(onclick='toggleSubscribe(event, #{user.user_id}, 1);')
+							if (isSub)
+								if (isSub[i])
+									i(style='background-position: -122px 0;')
+								else
+									i(style='background-position: -92px 0;')
+							else
+								i(style='background-position: -122px 0;')

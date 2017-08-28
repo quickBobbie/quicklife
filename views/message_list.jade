@@ -1,0 +1,16 @@
+extends user_layout
+
+block content
+	#content.pjax_content
+		block user_content
+	aside
+		.side_title
+			h2 Messenger
+		if (users)
+			each user in users
+				.message_list
+					ul
+						li
+							a(href="?user=#{user.user}")
+								.mess_user
+									h3=user.name

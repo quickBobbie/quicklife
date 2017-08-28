@@ -1,0 +1,28 @@
+extends peoples
+
+block user_content
+	#content_form
+		.form_title
+			h2= 'Найдено ' + count + ' человек'
+		.search_form
+			.form_block
+				input#people_search(name='people_search' placeholder='Поск пользователей')
+				#submit_search Найти
+	.content
+		each user, i in users
+			section
+				.people
+					if (user.avatar)
+						img.user_avatar(src='../users/#{user.user_id}/images/#{user.avatar}')
+					else
+						img.user_avatar(src='../images/avatar.png')
+					a(href='/id#{user.user_id}').people_info
+						h3= user.first_name + ' ' + user.last_name
+						span= 'Лайков (' + user.likes.length + ')'
+					if (user.user_id != isUserID)
+						.people_action
+							#people_add.toggleSubscribe(onclick='toggleSubscribe(event, #{user.user_id}, 1);')
+								if (isSub[i])
+									i(style='background-position: -122px 0;')
+								else
+									i(style='background-position: -92px 0;')

@@ -1,0 +1,79 @@
+doctype
+html(lang='ru')
+	head
+		if (user)
+			title quicklife | #{user.first_name} #{user.last_name}
+		else
+			title quicklife | #{title}
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet' href='../styles/user.css')
+		script(src='../js/lib/jquery-3.1.0.js')
+		script(src='/socket.io/socket.io.js')
+		script(src='../js/al/action.js')
+		script(src='../js/al/postController.js')
+		script(src='../js/al/getController.js')
+	body
+		#container
+			header
+				h1 quicklife
+				#header_container
+					nav
+						ul
+							li
+								a(href='/id#{isUserID}')
+									i(style='background-position: 0 0;')
+							li
+								a(href='/news')
+									i(style='background-position: -31px 0; width: 26px;')
+							li
+								a(href='/messenger')
+									i(style='background-position: -57px 0;')
+							li
+								a(href='/users')
+									i(style='background-position: -88px 0; width: 26px;')
+							li
+								a(href='/logout')
+									i(style='background-position: -177px 0;')
+			#user_container
+				block content
+		if (isUser)
+			.status_form
+				form(method='post' action='/id:id')
+					textarea#edit_status(name='user_status')=user.status
+					button#status_submit(type='submit') Изменить
+		if (isUser)
+			.modal_avatar(style='display:none;')
+				.canvas(onclick='hideModalAvatar();')
+				.upload_avatar
+					.load_new
+						form(method='post' action='/id:id' enctype='multipart/form-data')
+							input(type='file' accept='image/*' name='avatar' style="display:none;")
+							button.load_file Загрузить
+							if (user.avatar)
+								img.photo(src='../users/#{user.user_id}/images/#{user.avatar}')
+							else
+								img.photo(src='../images/avatar.png')
+							button(type='submit') Сохранить
+					//- .load_user
+					//- 	if (images)
+					//- 		each img in images.reverse()
+					//- 			img.photo(src='../users/#{img.uid}/images/#{img.name}')
+		if (images)
+			.modal_image(style='display:none;')
+				.canvas(onclick="$('.modal_image').hide();")
+				.full_image
+					.i_header
+						h3 date
+					.i_container
+						center
+							img.i_content(src='../users/#{user.user_id}/images/#{user.avatar}')
+					.i_action
+						.i_like
+							i
+							span Понравилось 10 людям
+
+		script(src='../js/al/main.js')
+		script(src='../js/al/domController.js')
+		script(src='../js/al/socket.js')
+			

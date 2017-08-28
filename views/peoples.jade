@@ -1,0 +1,62 @@
+extends user_layout
+
+block content
+	#content.pjax_content
+		block user_content
+	aside
+		#side_block
+			.side_title
+				h2 Люди
+			.peoples_form
+				form#search-users(method='GET' action='/users')
+					.pf_block
+						.pf_title
+							span Город
+						.pf_action
+							select#select_city(name='city')
+								option(value='all') Выберите город
+								each city in cities
+									option(value='#{city}')= city
+					.pf_block
+						.pf_title
+							span Возраст
+						.pf_action
+							select#select_oldDown(name='old-down')
+								option(value='0') -От-
+								-for(var i = 14; i <=99; i++){
+									option(value='#{i}')= i
+								-}
+							span#select_br -
+							select#select_oldUp(name='old-up')
+								option(value='0') -До-
+								-for(var i = 14; i <=99; i++){
+									option(value='#{i}')= i
+								-}
+					.pf_block
+						.pf_title
+							span Пол
+						.pf_action
+							ul
+								-var gender = ['Любой', 'Мужской', 'Женский']
+								-for(var i = 0; i <=2; i++){
+									li
+										-if(i == 0)
+											input(type='radio' checked name='gender' value='all')
+										-else
+											input(type='radio' name='gender' value='#{gender[i]}')
+										span= gender[i]
+								-}
+					.pf_block
+						.pf_title
+							span Семейное положение
+						.pf_action
+							select#select_SP(name='sp')
+								option(value='all') Все
+								option(value='isActive') В активном поиске
+								option(value='isFriend') Встречается
+								option(value='isGood') Женат/замужем
+								option(value='isBad') Не женат/не замужем
+					.pf_block
+						.pf_title
+							input(type='checkbox' name='is-photo' check="false") 
+							span=' Только с фотографией'

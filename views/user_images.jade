@@ -1,0 +1,19 @@
+extends user
+
+block user_content
+	.single_content
+		.sc_title
+			h2= images.length + ' ' + pagetitle
+		if (isUser)
+			.sc_form
+				.uploads_images
+					
+				form(method='post' action='/id:id' enctype='multipart/form-data')
+					input(type='file' name='images' multiple accept='image/*' style='display:none;')
+					button#upload_images Загрузить
+					button(type='submit') Сохранить
+	.photos_block
+		if (images)
+			each img in images.reverse()
+				section(onclick="showFullImage('../users/#{img.uid}/images/#{img.name}')")
+					img.photo(src='../users/#{img.uid}/images/#{img.name}')

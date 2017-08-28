@@ -1,0 +1,65 @@
+extends user_layout
+
+block content
+	#content.pjax_content
+		block user_content
+	aside
+		#user_profile
+			.side_title
+				h2= user.first_name + ' ' + user.last_name
+				if (user.net_status)
+					.net_status
+			if (user.avatar)
+				img.user_avatar(src='../users/#{user.user_id}/images/#{user.avatar}')
+			else
+				img.user_avatar(src='../images/avatar.png')
+			if (isUser)
+				.user_status(onclick="showStatusEditor();")
+					if (user.status)
+						p= user.status
+					else
+						p О чем вы думаете?
+			else
+				.user_status
+					if (user.status)
+						p= user.status
+					else
+						p О чем вы думаете?
+			.profile_actions
+				ul
+					if (isUser)
+						li
+							a(href='?page=settings') Настройки профиля
+						li 
+							a
+								i
+								span= user.likes.length
+					else 
+						li
+							if (!isSub)
+								a.toggleSubscribe(href='' onclick='toggleSubscribe(event, #{user.user_id}, 0);') Подписаться
+							else
+								a.toggleSubscribe(href='' onclick='toggleSubscribe(event, #{user.user_id}, 0);') Вы подписаны
+						li 
+							a.toggleProfileLike(href='' onclick='toggleProfileLike(event, #{user.user_id});')
+								i
+								span= user.likes.length
+			if (!isUser)
+				.profile_actions
+					ul
+						li
+							a(href='messenger?user=#{user.user_id}') Написать сообщение
+			.profile_menu
+				nav
+					ul
+						li
+							a(href='/id#{user.user_id}') Лента
+						li
+							a(href='?page=subscribes') Подписки
+						li
+							a(href='?page=subscribers') Подписчики
+						li
+							a(href='?page=images') Фотографии
+						li
+							a(href='?page=info') Информация
+	

@@ -1,0 +1,6 @@
+{
+	"host" : "localhost",
+	"database" : "quicklife",
+	"username" : "admin",
+	"password" : "1234"
+}

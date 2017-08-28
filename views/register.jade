@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	#register_block
+		h2 Быстрая регистрация
+		form(method='post' action='/register')
+			span Email
+			input#login(type='text' name='login' placeholder='your_login')
+			.reg_password
+				ul
+					li
+						span Пароль
+						input#password_1(type='password' name='password_1' placeholder='password')
+					li
+						span Повторите пароль
+						input#password_2(type='password' name='password_2' placeholder='password')
+			span Имя
+			input#first_name(type='text' name='first_name' placeholder='Иван')
+			span Фамилия
+			input#last_name(type='text' name='last_name' placeholder='Иванов')
+			button#submit(type='submit') Зарегистрироваться
